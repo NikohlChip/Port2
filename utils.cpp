@@ -88,7 +88,7 @@ int add_user_if_not_exists(std::vector<User> &users){
 void calculatePi(){
     int sampleSize;
 
-    std::cout << "EXPLANATION\n" << "This program will calculate a rather accurate value of Pi using the Monte Carlo method." << 
+    std::cout << "DESCRIPTION\n" << "This program will calculate a rather accurate value of Pi using the Monte Carlo method." << 
     std::endl << "Upon calculation, you will be prompted to enter a value determining the total sample size for the calculation.\n";
     std::cout << "Set sample size (this will begin the calculation!): ";
     std::cin >> sampleSize;
@@ -103,15 +103,16 @@ void calculatePi(){
         y.push_back((double)rand()/RAND_MAX);
         res.push_back(sqrt(pow(x[i],2) + pow(y[i],2)));
         if(res[i]<=1.0) inCircle++;
-        
-        std::cout << "\rIteration: " << i+1 << "    Current Pi: " << 4.0*inCircle/(i+1) <<
-        "    Progress: " <<(double)i*100/(double)sampleSize << "%" <<
-        std::flush;
+
+        std::cout << "\r";
+        std::cout << "\e[0;36m""Iteration: " << std::setfill('0') << std::setw(10) << i+1 << "\e[0m" << std::setfill(' ');
+        std::cout << "\e[0;32m""\tCurrent Pi: " << std::setfill('0') << std::setw(7) << 4.0*inCircle / (i+1) << "\e[0m" << std::setfill(' ');
+        std::cout << "\e[41m""\tProgress: " << std::setfill('0') << std::setw(4) << (double)i * 100 / (double)sampleSize << std::setfill(' ') << "%""\e[0m" << std::flush;
     }
 
     resultingPi = 4.0 * inCircle / sampleSize;
     std::cout << "\nCalculation complete.\n" <<
-    "\nSample size:\t" << sampleSize+1 << 
+    "\nSample size:\t" << sampleSize << 
     "\nIn circle*4:\t" << 4*inCircle <<
     "\nCalculated Pi:\t" << resultingPi << "\n\n";
 }
