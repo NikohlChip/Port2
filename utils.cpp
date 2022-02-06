@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <math.h>
+#include <iomanip>
 #include "header.h"
 
 int User::genID(int range){
@@ -27,7 +29,7 @@ User::User(int id, std::string f_name, std::string l_name){
 void showMenu(std::vector<User> users){
     std::cout << "---SELECT OPTION---\n1: List users - currently " <<
         users.size() << " user(s)\n2: Add new entry\n3: Import user list\n" <<
-        "4: Export user list\n0: Exit program\n\nAwaiting input--->";
+        "4: Export user list\n5: Calculate Pi\n0: Exit program\n\nAwaiting input--->";
 }
 
 void importFile(std::vector<User> &users){
@@ -48,7 +50,7 @@ void exportFile(std::vector<User> users){
     std::string filename;
     filename = "config.txt";
     std::ofstream file;
-    file.open(filename, std::ofstream::app | std::ofstream::out);
+    file.open(filename, std::ofstream::out);
 
     for(int i=0; i<users.size(); i++){
         file << users[i].id << "\t" << users[i].f_name << "\t" << users[i].l_name << std::endl;
@@ -81,4 +83,35 @@ int add_user_if_not_exists(std::vector<User> &users){
     }
     users.push_back(newUser);
     return users.size() - 1;
+}
+
+void calculatePi(){
+    int sampleSize;
+
+    std::cout << "EXPLANATION\n" << "This program will calculate a rather accurate value of Pi using the Monte Carlo method." << 
+    std::endl << "Upon calculation, you will be prompted to enter a value determining the total sample size for the calculation.\n";
+    std::cout << "Set sample size (this will begin the calculation!): ";
+    std::cin >> sampleSize;
+
+    srand(time(NULL));
+    std::vector<double> x,y,res;
+    double sum, resultingPi;
+    int inCircle;
+
+    for(int i=0; i<sampleSize; i++){
+        x.push_back((double)rand()/RAND_MAX);
+        y.push_back((double)rand()/RAND_MAX);
+        res.push_back(sqrt(pow(x[i],2) + pow(y[i],2)));
+        if(res[i]<=1.0) inCircle++;
+        
+        std::cout << "\rIteration: " << i+1 << "    Current Pi: " << 4.0*inCircle/(i+1) <<
+        "    Progress: " <<(double)i*100/(double)sampleSize << "%" <<
+        std::flush;
+    }
+
+    resultingPi = 4.0 * inCircle / sampleSize;
+    std::cout << "\nCalculation complete.\n" <<
+    "\nSample size:\t" << sampleSize+1 << 
+    "\nIn circle*4:\t" << 4*inCircle <<
+    "\nCalculated Pi:\t" << resultingPi << "\n\n";
 }

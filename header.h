@@ -17,5 +17,6 @@ void importFile(std::vector<User> &users);
 void exportFile(std::vector<User> users);
 void listUsers(std::vector<User> users);
 int add_user_if_not_exists(std::vector<User> &users);
+void calculatePi();
 
 #endif

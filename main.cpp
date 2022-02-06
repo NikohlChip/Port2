@@ -1,9 +1,4 @@
 #include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include <ctime>
-#include <algorithm>
-#include <string>
 #include <vector>
 #include "header.h"
 
@@ -28,6 +23,9 @@ int main(){
                 break;
             case 4:
                 exportFile(users);
+                break;
+            case 5:
+                calculatePi();
                 break;
             case 0:
                 return 0;
