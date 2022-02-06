@@ -1,0 +1,6 @@
+5381    Nikohl	Chip
+2194    John    Doe
+3882    Mike    Clan
+7790    Dany    Smith
+5310    Miller  White
+4412    Doe     Baker

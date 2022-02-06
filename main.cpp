@@ -12,8 +12,7 @@ int main(){
     std::vector<User> users;
     
     do{
-        std::cout << "---SELECT OPTION---\n1: List users(" << users.size() <<
-        ") user(s)\n2: Add users\n3: Import user list\n4: Export user list\n0: Exit program\n\nAwaiting input--->";
+        showMenu(users);
         std::cin >> SELECTION;
         std::cout << "\n";
 
@@ -23,6 +22,12 @@ int main(){
                 break;
             case 2:
                 add_user_if_not_exists(users);
+                break;
+            case 3:
+                importFile(users);
+                break;
+            case 4:
+                exportFile(users);
                 break;
             case 0:
                 return 0;
